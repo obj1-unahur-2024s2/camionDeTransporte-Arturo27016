@@ -1,9 +1,31 @@
 import cosas.*
+import camion.*
 
-describe "group of test for cosas" {
+describe "test de las cosas del ej de camion de transporte" {
 
-  test "first test" {
-    assert.that(true)
+  test "paquete de ladrillos con 100 pesa 200" {
+    ladrillos.cantidad(100)
+    assert.equals(200, ladrillos.peso())
   }
 
+  test "bateria antiaerea con misiles tiene 100 de peligro"{
+    bateriaAntiaerea.estaConMisiles(true)
+    assert.equals(100, bateriaAntiaerea.peligrosidad())
+    assert.equals(300, bateriaAntiaerea.peso())
+  }
+
+  test "contenedor con bumblebee, knightrider y arena con 100 y tiene peligro 15 y pesa 1500"{
+    const lista = [bumblebee,knightRider,arena]
+    contenedor.agregarVariasCosas(lista)
+    arena.peso(100)
+    assert.equals(15,contenedor.peligrosidad())
+    assert.equals(1500, contenedor.peso())
+  }
+  
+  test "embalaje con residuos de 30k de peso pesa 30 y peligro 100"{
+    residuosRadioactivos.peso(30)
+    embalaje.cosaEnvuelta(residuosRadioactivos)
+    assert.equals(30,embalaje.peso())
+    assert.equals(100,embalaje.peligrosidad())
+  }
 }

@@ -1,9 +1,39 @@
 import camion.*
+import cosas.*
 
 describe "group of test for camion" {
 
-  test "first test" {
-    assert.that(true)
+  method initialize(){
+    bumblebee.transformarseEnRobot()
+    arena.peso(150)
+    bateriaAntiaerea.estaConMisiles(true)
+    ladrillos.cantidad(80)
+    embalaje.cosaEnvuelta(ladrillos)
+    camion.cargarVariasCosas([bumblebee,arena,bateriaAntiaerea,ladrillos])
   }
-
+  test "peso total del camion es 800+150+300+160+1000 de tara" {
+    assert.equals(1000+800+150+300+160, camion.pesoTotal())
+  }
+  test "el peso de cada carga es 800, 150, 300 y 160"{
+    assert.equals([800,150,300,160], camion.pesosDeLaCarga())
+  }
+  test "es falso que todos los pesos sean impar"{
+    assert.notThat(camion.todoPesoImpar())
+  }
+  test "algo pesa 150"{
+    assert.that(camion.algoPesa(150))
+  }
+  test " hay algo con peligrosidad 100 y es la bateria anti aerea"{
+    assert.equals(bateriaAntiaerea,camion.cosaConPeligrosidad(100))
+  }
+  test " no hay nada que supere peligrosidad 150"{
+    assert.equals([],camion.cosasQueSuperanPeligrosidad(150))
+  }
+  test "solo la bateria es mas peligrosa que bumblebee"{
+    assert.equals([bateriaAntiaerea], camion.cosasMasPeligrosaQue(bumblebee))
+  }
+  test "el camion no esta excedido de peso"{
+    assert.notThat(camion.excedidoMaximoPeso())
+  }
+  
 }
